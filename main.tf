@@ -107,5 +107,3 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 }
-
-## Complete configuration
