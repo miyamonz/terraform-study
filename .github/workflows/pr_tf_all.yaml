@@ -2,8 +2,8 @@ name: pr_tf
 on:
   pull_request:
     paths:
-    - "*/*.tf"
-    - "*/*.tfvars"
+    - "**.tf"
+    - "**.tfvars"
     type:
     - opened
     - synchronize
@@ -11,7 +11,8 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   TF_ACTION_TFE_TOKEN: ${{ secrets.TF_ACTION_TFE_TOKEN }}
-  TF_ACTIONS_VERSION: 0.12.16
+  TF_ACTIONS_VERSION: 0.12.20
+  ARM_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}
 jobs:
   terraform:
     name: plan all
@@ -27,3 +28,18 @@ jobs:
         tf_actions_version: ${{ env.TF_ACTIONS_VERSION }}
         # tf_actions_working_dir: ${{ matrix.dir }}
         tf_actions_subcommand: 'fmt'
+    - name: Terraform - init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_ACTIONS_VERSION }}
+        tf_actions_subcommand: 'init'
+    - name: Terraform - validate
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_ACTIONS_VERSION }}
+        tf_actions_subcommand: 'validate'
+    - name: Terraform - plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_ACTIONS_VERSION }}
+        tf_actions_subcommand: 'plan'
