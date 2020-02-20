@@ -26,10 +26,10 @@ resource "azurerm_subnet" "subnet" {
 }
 
 variable "resource_prefix" {
-    type = string
+  type = string
 }
 variable "location" {
-    type = string
+  type = string
 }
 
 # Create public IP
