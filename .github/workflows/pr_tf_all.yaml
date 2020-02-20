@@ -2,8 +2,8 @@ name: pr_tf
 on:
   pull_request:
     paths:
-    - "*/*.tf"
-    - "*/*.tfvars"
+    - "**.tf"
+    - "**.tfvars"
     type:
     - opened
     - synchronize
