@@ -1,0 +1,29 @@
+name: pr_tf
+on:
+  pull_request:
+    paths:
+    - "*/*.tf"
+    - "*/*.tfvars"
+    type:
+    - opened
+    - synchronize
+    - rerequested
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  TF_ACTION_TFE_TOKEN: ${{ secrets.TF_ACTION_TFE_TOKEN }}
+  TF_ACTIONS_VERSION: 0.12.16
+jobs:
+  terraform:
+    name: plan all
+    runs-on: ubuntu-latest
+    # strategy: 
+      # matrix:
+      # dir:
+    steps:
+    - uses: actions/checkout@master
+    - name: Terraform - Format
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TF_ACTIONS_VERSION }}
+        # tf_actions_working_dir: ${{ matrix.dir }}
+        tf_actions_subcommand: 'fmt'
