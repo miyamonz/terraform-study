@@ -11,7 +11,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   TF_ACTION_TFE_TOKEN: ${{ secrets.TF_ACTION_TFE_TOKEN }}
-  TF_ACTIONS_VERSION: 0.12.16
+  TF_ACTIONS_VERSION: 0.12.20
   ARM_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}
 jobs:
   terraform:
